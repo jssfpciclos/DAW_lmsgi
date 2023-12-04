@@ -99,6 +99,44 @@ Los componentes básicos de un esquema XSD son los siguientes:
   - Un elemento puede tener atributos. Por ejemplo, el elemento *libro* del esquema XSD del libro tiene un atributo llamado *autor*.
   - Un elemento tiene un tipo de datos. Por ejemplo, el elemento *titulo* del esquema XSD del libro tiene un tipo de datos *xs:string*.
 
+  **Valores por defect**
+
+  Un elemento puede tener un valor por defecto. Por ejemplo, el elemento *libro* del esquema XSD del libro tiene un atributo llamado *autor* con un valor por defecto *Miguel de Cervantes*.
+
+  ```xsd
+  <xsd:element name="libro">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="titulo" type="xsd:string"/>
+        <xsd:element name="autor" type="xsd:string" default="Miguel de Cervantes"/>
+        <xsd:element name="editorial" type="xsd:string"/>
+        <xsd:element name="precio" type="xsd:decimal"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  ```
+
+  De esta forma, si el elemento *autor* no aparece en el documento XML, se le asigna el valor por defecto *Miguel de Cervantes*.
+
+  **Valores fijos**
+
+  Un elemento puede tener un valor fijo. Por ejemplo, el elemento *libro* del esquema XSD del libro tiene un atributo llamado *autor* con un valor fijo *Miguel de Cervantes*.
+
+  ```xsd
+  <xsd:element name="libro">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="titulo" type="xsd:string"/>
+        <xsd:element name="autor" type="xsd:string" fixed="Miguel de Cervantes"/>
+        <xsd:element name="editorial" type="xsd:string"/>
+        <xsd:element name="precio" type="xsd:decimal"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  ```
+  De esta forma, si el elemento *autor* aparece en el documento XML, debe tener el valor *Miguel de Cervantes*.
+
+
   ##### Atributos de un xs:element
 
   Los atributos de un *xs:element* son los siguientes:
@@ -115,6 +153,12 @@ Los componentes básicos de un esquema XSD son los siguientes:
     - **required**: indica que el atributo XML que se está definiendo es obligatorio.
     - **optional**: indica que el atributo XML que se está definiendo es opcional.
     - **prohibited**: indica que el atributo XML que se está definiendo no se puede utilizar.
+
+
+  > 💡 **Importante**
+    - Los atributos pueden aparecer en cualquier orden, pero los elementos deben aparecer en el orden en que se definen.<br>
+    - Los atributos pueden tener restricciones, esto se explica en el siguiente apartado.<br>
+
 
 
   #### 3.2.2 Elementos complejos
@@ -327,6 +371,115 @@ Las declaraciones de atributos para un elemento deben aparecer siempre al final 
 </xsd:element>
 ```
 El elemento complejo libro tiene dos elementos hijos (titulo y autor) y un atributo (isbn). El atributo isbn es opcional, ya que no tiene el atributo “use” y por lo tanto el valor por defecto es “optional”.
+
+### 4.1 Atributos de tipo simple 
+
+Los atributos de tipo simple son aquellos que sólo pueden contener un valor simple. Los atributos de tipo simple se definen utilizando el elemento *xs:attribute*.
+
+```xml
+<xsd:attribute name="isbn" type="xsd:string"/>
+```
+
+### 4.2 Atributos con restricciones
+
+Los atributos pueden tener restricciones. Las restricciones que se pueden aplicar a los atributos son las siguientes:
+
+- **xs:enumeration**: se utiliza para indicar una lista de valores que puede tomar el atributo.
+- **xs:minInclusive**: se utiliza para indicar el valor mínimo que puede tomar el atributo.
+- **xs:maxInclusive**: se utiliza para indicar el valor máximo que puede tomar el atributo.
+- **xs:minExclusive**: se utiliza para indicar el valor mínimo que puede tomar el atributo.
+- **xs:maxExclusive**: se utiliza para indicar el valor máximo que puede tomar el atributo.
+- **xs:pattern**: se utiliza para indicar una expresión regular que debe cumplir el atributo.
+
+Ejemplo de atributo con restricciones:
+
+```xml
+<xsd:attribute name="isbn">
+  <xsd:simpleType>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[0-9]{3}-[0-9]{2}-[0-9]{4}-[0-9]{4}-[0-9]{1}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:attribute>
+```
+
+El atributo isbn debe tener un valor que cumpla la expresión regular indicada en el elemento *xs:pattern*.
+
+> ▶️ **Importante**
+> - Cuando un atributo tiene restricciones, no puede tener un tipo de datos asociado.<br>
+>   Requiere que el atributo “type” no esté presente.<br>
+>   En la `xs:restriction` se indica el tipo de datos del atributo.<br>
+
+En el siguiente ejemplo se usa un atrbuto con una enumeración de valores posibles:
+
+```xml
+<xsd:attribute name="tipo">
+  <xsd:simpleType>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="novela"/>
+      <xsd:enumeration value="ensayo"/>
+      <xsd:enumeration value="poesia"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:attribute>
+```
+
+El xml que valida este esquema sería el siguiente
+
+```xml
+<libro tipo="novela">
+  <titulo>El Quijote</titulo>
+  <autor>Miguel de Cervantes</autor>
+  <editorial>Planeta</editorial>
+  <precio>19.95</precio>
+</libro>
+```
+
+### 4.3 Atributos de tipo compuesto
+
+Los atributos de tipo compuesto son aquellos que pueden contener otros elementos XML. Los atributos de tipo compuesto se definen utilizando el elemento *xs:attributeGroup*.
+
+```xml
+<xsd:attributeGroup name="atributosLibro">
+  <xsd:attribute name="isbn" type="xsd:string"/>
+  <xsd:attribute name="tipo">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="novela"/>
+        <xsd:enumeration value="ensayo"/>
+        <xsd:enumeration value="poesia"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:attribute>
+</xsd:attributeGroup>
+```
+
+El atributoGroup “atributosLibro” se puede utilizar en cualquier elemento XML que se defina en el esquema XSD. Ejemplo:
+
+```xml
+<xsd:element name="libro">
+  <xsd:complexType>
+    <xsd:sequence>
+      <xsd:element name="titulo" type="xsd:string"/>
+      <xsd:element name="autor" type="xsd:string"/>
+    </xsd:sequence>
+    <xsd:attributeGroup ref="atributosLibro"/>
+  </xsd:complexType>
+</xsd:element>
+```
+
+Un XML que valida este esquema sería el siguiente
+
+```xml
+<libro tipo="novela">
+  <titulo>El Quijote</titulo>
+  <autor>Miguel de Cervantes</autor>
+  <editorial>Planeta</editorial>
+  <precio>19.95</precio>
+</libro>
+```
+
+
 
 
 
