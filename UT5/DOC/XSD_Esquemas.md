@@ -385,11 +385,9 @@ Los atributos de tipo simple son aquellos que sólo pueden contener un valor sim
 Los atributos pueden tener restricciones. Las restricciones que se pueden aplicar a los atributos son las siguientes:
 
 - **xs:enumeration**: se utiliza para indicar una lista de valores que puede tomar el atributo.
-- **xs:minInclusive**: se utiliza para indicar el valor mínimo que puede tomar el atributo.
-- **xs:maxInclusive**: se utiliza para indicar el valor máximo que puede tomar el atributo.
-- **xs:minExclusive**: se utiliza para indicar el valor mínimo que puede tomar el atributo.
-- **xs:maxExclusive**: se utiliza para indicar el valor máximo que puede tomar el atributo.
 - **xs:pattern**: se utiliza para indicar una expresión regular que debe cumplir el atributo.
+- **xs:maxInclusive/maxExclusive**: se utiliza para indicar el valor máximo (incluido o no) que puede tomar el atributo.
+- **xs:minInclusive/Exclusive**: se utiliza para indicar el valor mínimo (incluido o no) que puede tomar el atributo.
 
 Ejemplo de atributo con restricciones:
 
@@ -471,7 +469,7 @@ El atributoGroup “atributosLibro” se puede utilizar en cualquier elemento XM
 Un XML que valida este esquema sería el siguiente
 
 ```xml
-<libro tipo="novela">
+<libro tipo="novela" isbn="2343242342342" >
   <titulo>El Quijote</titulo>
   <autor>Miguel de Cervantes</autor>
   <editorial>Planeta</editorial>
@@ -522,4 +520,712 @@ y luego usarlo en la definición del elemento edad:
 ```
 
 
+### 5.2 Tipos de datos complejos
+
+Los tipos de datos complejos son aquellos que contienen otros elementos XML. Los tipos de datos complejos se definen utilizando el elemento *xs:complexType*.
+
+```xml
+<xs:complexType name="type_persona">
+  <xs:sequence>
+    <xs:element name="nombre" type="xs:string"/>
+    <xs:element name="edad" type="xs:integer"/>
+  </xs:sequence>
+</xs:complexType>
+```
+
+El tipo de datos complejo “type_persona” se puede utilizar en cualquier elemento XML que se defina en el esquema XSD. Ejemplo:
+
+```xml
+<xs:element name="persona" type="type_persona"/>
+```
+
+Un tipo complejo también se puede referenciar desde otro tipo complejo. Ejemplo:
+
+```xml
+<xs:complexType name="type_persona">
+  <xs:sequence>
+    <xs:element name="nombre" type="xs:string"/>
+    <xs:element name="edad" type="xs:integer"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="type_persona2">
+  <xs:sequence>
+    <xs:element name="persona" type="type_persona"/>
+  </xs:sequence>
+</xs:complexType>
+```
+
+### 5.3 Tipos de datos derivados
+
+Los tipos de datos derivados son aquellos que se derivan de otros tipos de datos. Los tipos de datos derivados se definen utilizando el elemento *xs:restriction*.
+
+```xml
+<xs:simpleType name="type_edad">
+  <xs:restriction base="xs:integer">
+    <xs:minInclusive value="0"/>
+    <xs:maxInclusive value="100"/>
+  </xs:restriction>
+</xs:simpleType>
+```
+
+El tipo de datos “type_edad” se deriva del tipo de datos “xs:integer” y se le aplican las restricciones indicadas en el elemento *xs:restriction*. El tipo de datos “type_edad” se puede utilizar en cualquier elemento XML que se defina en el esquema XSD. Ejemplo:
+
+```xml
+<xs:element name="edad" type="type_edad"/>
+```
+
+### 5.4 Tipos de datos enumerados
+
+Los tipos de datos enumerados son aquellos que sólo pueden tomar un valor de una lista de valores posibles. Los tipos de datos enumerados se definen utilizando el elemento *xs:enumeration*.
+
+```xml
+<xs:simpleType name="type_tipo">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="novela"/>
+    <xs:enumeration value="ensayo"/>
+    <xs:enumeration value="poesia"/>
+  </xs:restriction>
+</xs:simpleType>
+```
+
+El tipo de datos “type_tipo” sólo puede tomar los valores “novela”, “ensayo” o “poesia”. El tipo de datos “type_tipo” se puede utilizar en cualquier elemento XML que se defina en el esquema XSD. Ejemplo:
+
+```xml
+<xs:element name="tipo" type="type_tipo"/>
+```
+
+
+
+
+## Ejemplos de esquemas XSD
+
+### Ejemplo 1
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Define un tipo complejo para student -->
+  <xs:complexType name="StudentType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="Age" type="xs:positiveInteger"/>
+      <xs:element name="Courses" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Define el elemento raiz como lista de los estudiantes -->
+  <xs:element name="Students">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Student" type="StudentType" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
+```
+
+Un xml que valida este esquema sería el siguiente:
+
+```xml
+<Students>
+  <Student>
+    <Name>John Doe</Name>
+    <Age>20</Age>
+    <Courses>Math</Courses>
+    <Courses>English</Courses>
+  </Student>
+  <Student>
+    <Name>Jane Smith</Name>
+    <Age>22</Age>
+  </Student>
+</Students>
+```
+
+### Ejemplo 2
+
+En este ejemplo se define un esquema XSD que define la estructura de un documento XML que contiene una lista de estudiantes. 
+
+Cada estudiante tiene un elemento ID, y un elemento `personalInfo` que contiene los elementos `firstName`, `lastName` y `age`. Además, cada estudiante tiene un elemento `courses` que contiene una lista de cursos. Por último, cada estudiante tiene un elemento `address` que contiene los elementos `street`, `city`, `state` y `zip`.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+   <!-- Define un tipo complejo para student -->
+  <xs:complexType name="StudentType">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:positiveInteger"/>
+      <xs:element name="PersonalInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="FirstName" type="xs:string"/>
+            <xs:element name="LastName" type="xs:string"/>
+            <xs:element name="Age" type="xs:positiveInteger"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Courses" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Address">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Street" type="xs:string"/>
+            <xs:element name="City" type="xs:string"/>
+            <xs:element name="State" type="xs:string"/>
+            <xs:element name="Zip" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+ <!-- Define el elemento raiz como lista de los estudiantes -->
+  <xs:element name="Students">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Student" type="StudentType" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
+```
+
+Un xml que valida este esquema sería el siguiente:
+
+```xml
+<Students>
+  <Student>
+    <ID>1</ID>
+    <PersonalInfo>
+      <FirstName>John</FirstName>
+      <LastName>Doe</LastName>
+      <Age>20</Age>
+    </PersonalInfo>
+    <Courses>Math</Courses>
+    <Courses>English</Courses>
+    <Address>
+      <Street>123 Main St</Street>
+      <City>Anytown</City>
+      <State>CA</State>
+      <Zip>12345</Zip>
+    </Address>
+  </Student>
+  <Student>
+    <ID>2</ID>
+    <PersonalInfo>
+      <FirstName>Jane</FirstName>
+      <LastName>Smith</LastName>
+      <Age>22</Age>
+    </PersonalInfo>
+    <Address>
+      <Street>456 Oak St</Street>
+      <City>Another City</City>
+      <State>NY</State>
+      <Zip>67890</Zip>
+    </Address>
+  </Student>
+</Students>
+```
+
+### Ejemplo 3
+
+En este ejemplo, ampliamos el ejemplo anterior añadiendo el uso de atributos.
+
+El elemento `student` tiene dos atributos: `status`, `enrollmentYear` y `GPA` que es opcional. El elemento `address` tiene un atributo `type`, que es una enumeración con los valores `Home` y `Work`.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Define una restricción de enumeración para el estado de un estudiante -->
+  <xs:simpleType name="StatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Active"/>
+      <xs:enumeration value="Inactive"/>
+      <xs:enumeration value="Graduated"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AddressTypeEnumeration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Home"/>
+      <xs:enumeration value="Work"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Define complex type for student -->
+  <xs:complexType name="StudentType">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:positiveInteger"/>
+      <xs:element name="PersonalInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="FirstName" type="xs:string"/>
+            <xs:element name="LastName" type="xs:string"/>
+            <xs:element name="Age" type="xs:positiveInteger"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Courses" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Address">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Street" type="xs:string"/>
+            <xs:element name="City" type="xs:string"/>
+            <xs:element name="State" type="xs:string"/>
+            <xs:element name="Zip" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+
+        <!-- Define attribute for address -->
+        <xs:attribute name="Type" type="AddressTypeEnumeration" default="Home"/>
+      </xs:element>
+
+      <!-- Define attributes for student -->
+      <xs:attribute name="Status" type="StatusType" default="Active"/>
+      <xs:attribute name="EnrollmentYear" type="xs:gYear"/>
+      <xs:attribute name="GPA" type="xs:decimal" use="optional"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Define the root element as a list of students -->
+  <xs:element name="Students">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Student" type="StudentType" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
+```
+
+```xml
+<Students xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="your_schema.xsd">
+
+  <Student Status="Active" EnrollmentYear="2022" GPA="3.75">
+    <ID>1</ID>
+    <PersonalInfo>
+      <FirstName>John</FirstName>
+      <LastName>Doe</LastName>
+      <Age>20</Age>
+    </PersonalInfo>
+    <Courses>Math</Courses>
+    <Courses>English</Courses>
+    <Address>
+      <Street>123 Main St</Street>
+      <City>Anytown</City>
+      <State>CA</State>
+      <Zip>12345</Zip>
+    </Address>
+  </Student>
+
+  <Student Status="Graduated" EnrollmentYear="2020">
+    <ID>2</ID>
+    <PersonalInfo>
+      <FirstName>Jane</FirstName>
+      <LastName>Smith</LastName>
+      <Age>22</Age>
+    </PersonalInfo>
+    <Courses>History</Courses>
+    <Address>
+      <Street>456 Oak St</Street>
+      <City>Another City</City>
+      <State>NY</State>
+      <Zip>67890</Zip>
+    </Address>
+  </Student>
+
+</Students>
+```
+
+### Ejemplo 4
+
+En este ejemplo se continua con el ejemplo anterior, pero se añade un elemento `email` dentro de `PersonalInfo` que posee una restricción de tipo `pattern` para revisar si un email es válido.
+
+También el atributo `GPA` tiene una restricción numérica, especificando el máximo y mínimo valor que puede tomar.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Define an enumeration for student status -->
+  <xs:simpleType name="StatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Active"/>
+      <xs:enumeration value="Inactive"/>
+      <xs:enumeration value="Graduated"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Define complex type for student -->
+  <xs:complexType name="StudentType">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:positiveInteger"/>
+      <xs:element name="PersonalInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="FirstName" type="xs:string"/>
+            <xs:element name="LastName" type="xs:string"/>
+            <xs:element name="Age" type="xs:positiveInteger"/>
+
+            <!-- Define email element with pattern restriction -->
+            <xs:element name="Email">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="Courses" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Address">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Street" type="xs:string"/>
+            <xs:element name="City" type="xs:string"/>
+            <xs:element name="State" type="xs:string"/>
+            <xs:element name="Zip" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+
+      <!-- Define attributes for student -->
+      <xs:attribute name="Status" type="StatusType" default="Active"/>
+      <xs:attribute name="EnrollmentYear" type="xs:gYear"/>
+      <xs:attribute name="GPA">
+        <!-- Define a restriction decimal for GPA -->
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0.0"/>
+            <xs:maxInclusive value="4.0"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Define the root element as a list of students -->
+  <xs:element name="Students">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Student" type="StudentType" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
+```
+
+### Ejemplo 5
+
+En este ejemplo se muestra como un elemento puede incluir varias restricciones.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Define complex type for book -->
+  <xs:complexType name="BookType">
+    <xs:sequence>
+      <xs:element name="Title">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <!-- Define a maxLength and minLenght restriction for Title -->
+            <xs:maxLength value="100"/>
+            <xs:minLength value="5"/>
+            <!-- Define a pattern restriction for Title -->
+            <xs:pattern value="[A-Za-z0-9\s]+"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Author" type="xs:string"/>
+      <xs:element name="PublicationYear" type="xs:gYear"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Define the root element as a list of books -->
+  <xs:element name="Books">
+    <xs:complexType>
+      <xs:sequence>
+        <!-- BookType está definido anteriormente como un tipo. Referenciamos a él a través del nombre -->
+        <xs:element name="Book" type="BookType" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
+```
+
+```xml
+<Books xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <Book>
+    <Title>The Great Gatsby</Title>
+    <Author>F. Scott Fitzgerald</Author>
+    <PublicationYear>1925</PublicationYear>
+  </Book>
+
+  <Book>
+    <Title>Programming Basics</Title>
+    <Author>John Coder</Author>
+    <PublicationYear>2021</PublicationYear>
+  </Book>
+
+</Books>
+```
+
+### Ejemplo 6
+
+En este ejemplo se muestra el uso de `attributeGroup` para definir un grupo de atributos que pueden ser usados en varios elementos.
+
+- Un `attributeGroup` llamdado "CommonAttributes" es definido para agrupar los atributos `CreatedBy`, `CreationDate`, `LastModifiedBy` y `LastModifiedDate`.
+- Dos tipos complejos, `BookType` y `ArticleType`, representan un libro y un artículo, respectivamente. Ambos tipos incluyen el mismo conjunto de atributos comunes usando la referencia CommonAttributes del `attributeGroup`.
+
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Define attribute group for common attributes -->
+  <xs:attributeGroup name="CommonAttributes">
+    <xs:attribute name="CreatedBy" type="xs:string"/>
+    <xs:attribute name="CreationDate" type="xs:date"/>
+    <xs:attribute name="LastModifiedBy" type="xs:string"/>
+    <xs:attribute name="LastModifiedDate" type="xs:date"/>
+  </xs:attributeGroup>
+
+  <!-- Define complex type for book -->
+  <xs:complexType name="BookType">
+    <xs:sequence>
+      <xs:element name="Title" type="xs:string"/>
+      <xs:element name="Author" type="xs:string"/>
+      <xs:element name="PublicationYear" type="xs:gYear"/>
+    </xs:sequence>
+    <!-- Use attribute group for common attributes -->
+    <xs:attributeGroup ref="CommonAttributes"/>
+  </xs:complexType>
+
+  <!-- Define complex type for article -->
+  <xs:complexType name="ArticleType">
+    <xs:sequence>
+      <xs:element name="Title" type="xs:string"/>
+      <xs:element name="Author" type="xs:string"/>
+      <xs:element name="PublicationDate" type="xs:date"/>
+    </xs:sequence>
+    <!-- Use attribute group for common attributes -->
+    <xs:attributeGroup ref="CommonAttributes"/>
+  </xs:complexType>
+
+  <!-- Define the root element as a list of publications -->
+  <xs:element name="Publications">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Book" type="BookType" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="Article" type="ArticleType" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
+```
+
+```xml
+<Publications xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="your_schema.xsd">
+
+  <Book CreatedBy="John Doe" CreationDate="2023-01-01" LastModifiedBy="Jane Smith" LastModifiedDate="2023-02-15">
+    <Title>The Great Gatsby</Title>
+    <Author>F. Scott Fitzgerald</Author>
+    <PublicationYear>1925</PublicationYear>
+  </Book>
+
+  <Article CreatedBy="Alice Johnson" CreationDate="2023-03-01" LastModifiedBy="Bob White" LastModifiedDate="2023-03-15">
+    <Title>Programming Basics</Title>
+    <Author>John Coder</Author>
+    <PublicationDate>2021-12-01</PublicationDate>
+  </Article>
+
+</Publications>
+```
+
+### Ejemplo 7
+
+En este ejemplo se muestra todo lo visto anteriormente, en un ejemplo más complejo y que incluye la mayoría de opciones que se pueden usar en un esquema XSD.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Define enumeration for status -->
+  <xs:simpleType name="StatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Active"/>
+      <xs:enumeration value="Inactive"/>
+      <xs:enumeration value="Pending"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Define attribute group for common attributes -->
+  <xs:attributeGroup name="CommonAttributes">
+    <xs:attribute name="CreatedBy" type="xs:string"/>
+    <xs:attribute name="CreationDate" type="xs:date"/>
+    <xs:attribute name="LastModifiedBy" type="xs:string"/>
+    <xs:attribute name="LastModifiedDate" type="xs:dateTime"/>
+  </xs:attributeGroup>
+
+  <!-- Define complex type for person -->
+  <xs:complexType name="PersonType">
+    <xs:sequence>
+      <xs:element name="FirstName" type="xs:string"/>
+      <xs:element name="LastName" type="xs:string"/>
+      <xs:element name="Age" type="xs:positiveInteger"/>
+    </xs:sequence>
+    <!-- Use attribute group for common attributes -->
+    <xs:attributeGroup ref="CommonAttributes"/>
+  </xs:complexType>
+
+  <!-- Define complex type for student -->
+  <xs:complexType name="StudentType">
+    <xs:all>
+      <xs:element name="ID" type="xs:positiveInteger"/>
+      <xs:element name="Courses" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Address">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Street" type="xs:string"/>
+            <xs:element name="City" type="xs:string"/>
+            <xs:element name="State" type="xs:string"/>
+            <xs:element name="Zip" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <!-- Use attribute group for common attributes -->
+    <xs:attributeGroup ref="CommonAttributes"/>
+    <!-- Additional student-specific attributes -->
+    <xs:attribute name="Status" type="StatusType" default="Active"/>
+    <xs:attribute name="EnrollmentYear" type="xs:gYear"/>
+  </xs:complexType>
+
+  <!-- Define complex type for book -->
+  <xs:complexType name="BookType">
+    <xs:all>
+      <xs:element name="Title">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="100"/>
+            <xs:minLength value="5"/>
+            <xs:pattern value="[A-Za-z0-9\s]+"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Author" type="xs:string"/>
+      <xs:element name="PublicationYear" type="xs:gYear"/>
+    </xs:all>
+    <!-- Use attribute group for common attributes -->
+    <xs:attributeGroup ref="CommonAttributes"/>
+  </xs:complexType>
+
+  <!-- Define the root element with xs:choice -->
+  <xs:element name="Publications">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Student" type="StudentType"/>
+        <xs:element name="Book" type="BookType"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
+```
+
+- `xs:choice`: Es usado en el nivel raiz para indicar que el documento XML puede contener una lista de estudiantes o una lista de libros, pero no ambos.
+- `xs:all`: es usado con `StudentType` y `BookType` para indicar que los elementos pueden aparecer en cualquier orden.
+  
+> 💡 La combinación de choice y all, permite flexibilidad en la ordenación de elementos dentro del XL, mientras manteninendo una clara estructura.
+
+
+Los siguientes XML son válidos según el anterior esquema:
+
+**Ejemplo 1**
+
+```xml
+<Publications xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="your_schema.xsd">
+
+  <Student CreatedBy="John Doe" CreationDate="2023-01-01" LastModifiedBy="Jane Smith" LastModifiedDate="2023-02-15"
+           Status="Active" EnrollmentYear="2022">
+    <FirstName>Alice</FirstName>
+    <LastName>Johnson</LastName>
+    <Age>22</Age>
+    <ID>12345</ID>
+    <Courses>
+      <Course>Math</Course>
+      <Course>English</Course>
+    </Courses>
+    <Address>
+      <Street>456 Oak St</Street>
+      <City>Another City</City>
+      <State>NY</State>
+      <Zip>67890</Zip>
+    </Address>
+  </Student>
+
+</Publications>
+```
+
+**Ejemplo 2**
+
+```xml
+<Publications xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="your_schema.xsd">
+
+  <Book CreatedBy="Jane Author" CreationDate="2023-03-01" LastModifiedBy="Bob Editor" LastModifiedDate="2023-03-15">
+    <Title>The XML Chronicles</Title>
+    <Author>John Coder</Author>
+    <PublicationYear>2021</PublicationYear>
+  </Book>
+
+</Publications>
+```
+
+**Ejemplo 3**
+
+```xml
+<Publications xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="your_schema.xsd">
+
+  <Student CreatedBy="Mike Student" CreationDate="2023-04-01" LastModifiedBy="Sara Tutor" LastModifiedDate="2023-04-15"
+           Status="Pending" EnrollmentYear="2023">
+    <FirstName>David</FirstName>
+    <LastName>Smith</LastName>
+    <Age>25</Age>
+    <ID>98765</ID>
+    <Courses>
+      <Course>Computer Science</Course>
+    </Courses>
+    <Address>
+      <Street>789 Main St</Street>
+      <City>Anytown</City>
+      <State>CA</State>
+      <Zip>54321</Zip>
+    </Address>
+  </Student>
+
+  <Book CreatedBy="Jane Author" CreationDate="2023-03-01" LastModifiedBy="Bob Editor" LastModifiedDate="2023-03-15">
+    <Title>Data Science Essentials</Title>
+    <Author>Lisa Scientist</Author>
+    <PublicationYear>2022</PublicationYear>
+  </Book>
+
+</Publications>
+```
 
