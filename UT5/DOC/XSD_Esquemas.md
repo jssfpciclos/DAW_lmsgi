@@ -272,13 +272,13 @@ o también
 
 #### 3.3.2 Vacio
 
-Un elemento vacío no contiene ningún valor. 
+Un elemento vacío no contiene ningún valor, pero puede tener atributos.
 
-> 💡 En XML Schema se utiliza el elemento *xs:empty* para indicar que un elemento XML es vacío.
-
-  ```xml
-  <xs:element name="sin_clasificacion" type="xs:empty"/>
-  ```
+```xml
+<xs:element name="sin_clasificacion">
+  <xs:complexType/>
+</xs:element>
+```
 > ↘️ Pero eso no implica que el elemento no pueda tener atributos.
 
 Más adelante se ampliará este concepto de elementos vacios, pues cuando se utilizan atributos es más complejo de definir.
