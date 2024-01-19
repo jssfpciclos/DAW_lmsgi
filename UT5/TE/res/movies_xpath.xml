@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Xml with movies -->
+<movies>
+    <movie out="yes" id="m0001">
+        <name lang="en">Jungle Cruise</name>
+        <release>2021-07-02</release>
+        <country>USA</country>
+        <imdb>7.0</imdb>
+        <boxoffice>600 M. USD</boxoffice>
+        <cast>
+            <actor id="a0001">
+                <name gender="male">Dwayne Johnson</name>
+                <age>49</age>
+            </actor>
+            <actor id="a0002">
+                <name gender="female">Emily Blunt</name>
+                <age>38</age>
+            </actor>
+            <actor id="a0003">
+                <name gender="male">Jack Whitehall</name>
+                <age>33</age>
+            </actor>
+        </cast>
+    </movie>
+    <movie out="yes" id="m0002">
+        <name lang="en">Antlers</name>
+        <release>2021-10-29</release>
+        <country>USA</country>
+        <imdb>6.4</imdb>
+        <boxoffice>19 M. USD</boxoffice>
+        <cast>
+            <actor id="a0004">
+                <name gender="male">Jesse Plemons</name>
+                <age>33</age>
+            </actor>
+            <actor id="a0005">
+                <name gender="female">Keri Russell</name>
+                <age>45</age>
+            </actor>
+            <actor id="a0006">
+                <name gender="male">Jeremy T. Thomas</name>
+                <age>15</age>
+            </actor>
+        </cast>
+    </movie>
+    <movie out="yes" id="m0003">
+        <name lang="en">Spider Man No Way Home</name>
+        <release>2021-12-17</release>
+        <country>USA</country>
+        <imdb>8.8</imdb>
+        <boxoffice>1.5 B. USD</boxoffice>
+        <cast>
+            <actor id="a0007">
+                <name gender="male">Tom Holland</name>
+                <age>25</age>
+            </actor>
+            <actor id="a0008">
+                <name gender="male">Tobey Maguire</name>
+                <age>46</age>
+            </actor>
+            <actor id="a0009">
+                <name gender="male">Andrew Garfield</name>
+                <age>38</age>
+            </actor>
+        </cast>
+    </movie>
+    <movie out="yes" id="m0004">
+        <name lang="en">Red Notice</name>
+        <release>2021-11-05</release>
+        <country>USA</country>
+        <imdb>6.3</imdb>
+        <boxoffice>450 M. USD</boxoffice>
+        <cast>
+            <actor id="a0001">
+                <name gender="male">Dwayne Johnson</name>
+                <age>49</age>
+            </actor>
+            <actor id="a0010">
+                <name gender="male">Ryan Reynolds</name>
+                <age>45</age>
+            </actor>
+            <actor id="a0011">
+                <name gender="female">Gal Gadot</name>
+                <age>36</age>
+            </actor>
+        </cast>
+    </movie>
+    <movie out="yes" id="m0005">
+        <name lang="en">Army of Thieves</name>
+        <release>2021-10-29</release>
+        <country>USA</country>
+        <imdb>6.4</imdb>
+        <boxoffice>300 M. USD</boxoffice>
+        <cast>
+            <actor id="a0012">
+                <name gender="male">Matthias Schweighöfer</name>
+                <age>40</age>
+            </actor>
+            <actor id="a0013">
+                <name gender="female">Nathalie Emmanuel</name>
+                <age>32</age>
+            </actor>
+            <actor id="a0014">
+                <name gender="female">Ruby O. Fee</name>
+                <age>25</age>
+            </actor>
+        </cast>
+    </movie>
+    <movie out="yes" id="m0006">
+        <name lang="hi">Shershaah</name>
+        <release>2021-08-12</release>
+        <country>India</country>
+        <imdb>8.7</imdb>
+        <boxoffice>30 M. USD</boxoffice>
+        <cast>
+            <actor id="a0015">
+                <name gender="male">Sidharth Malhotra</name>
+                <age>37</age>
+            </actor>
+            <actor id="a0016">
+                <name gender="female">Kiara Advani</name>
+                <age>29</age>
+            </actor>
+            <actor id="a0017">
+                <name gender="female">Shiv Panditt</name>
+                <age>37</age>
+            </actor>
+        </cast>
+    </movie>
+    <movie out="yes" id="m0007">
+        <name lang="hi">Roohi</name>
+        <release>2021-03-11</release>
+        <country>India</country>
+        <imdb>4.3</imdb>
+        <boxoffice>15 M. USD</boxoffice>
+        <cast>
+            <actor id="a0018">
+                <name gender="male">Rajkummar Rao</name>
+                <age>37</age>
+            </actor>
+            <actor id="a0019">
+                <name gender="female">Janhvi Kapoor</name>
+                <age>24</age>
+            </actor>
+            <actor id="a0020">
+                <name gender="male">Varun Sharma</name>
+                <age>31</age>
+            </actor>
+        </cast>
+    </movie>
+    <movie out="yes" id="m0008">
+        <name lang="ta">Karnan</name>
+        <release>2021-04-09</release>
+        <country>India</country>
+        <imdb>8.2</imdb>
+        <boxoffice>14 M. USD</boxoffice>
+        <cast>
+            <actor id="a0021">
+                <name gender="male">Dhanush</name>
+                <age>38</age>
+            </actor>
+            <actor id="a0022">
+                <name gender="female">Rajisha Vijayan</name>
+                <age>30</age>
+            </actor>
+            <actor id="a0023">
+                <name gender="male">Yogi Babu</name>
+                <age>36</age>
+            </actor>
+        </cast>
+    </movie>
+</movies>
