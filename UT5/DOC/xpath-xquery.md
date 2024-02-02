@@ -503,6 +503,7 @@ Dado el siguiente documento XML, escriba las expresiones XPath que devuelvan la 
 
 **Recursos**
 
+- [XQuery Wiki (ingles)](https://en.wikibooks.org/wiki/XQuery)
 - [Presentacion](https://drive.google.com/file/d/1v7XRm9lMKKuOkkCg5pequEKenDRQhAP5/view)
 - [Manual XQuery](https://drive.google.com/file/d/1_kcUQyhwpBsycrwxkeToF92A4_ss7EyY/view)
 
