@@ -4,6 +4,7 @@
 
 - [Tutorial xpath (mclibre)](https://www.mclibre.org/consultar/xml/lecciones/xml-xpath.html)
 - [Hoja resumen selectores xpath](https://devhints.io/xpath)
+- [Listado funciones lenguaje XPath](https://developer.mozilla.org/en-US/docs/Web/XPath/Functions)
 
 
 ## XPATH
@@ -497,3 +498,58 @@ Dado el siguiente documento XML, escriba las expresiones XPath que devuelvan la 
 26. Nombre de las alumnos matriculados en asignaturas con 0 créditos prácticos y que estudien la carrera de I.T. Informática .
 27. Nombre de los alumnos que estudian carreras cuyos planes son anteriores a 2002.
 
+
+## XQuery
+
+**Recursos**
+
+- [Presentacion](https://drive.google.com/file/d/1v7XRm9lMKKuOkkCg5pequEKenDRQhAP5/view)
+- [Manual XQuery](https://drive.google.com/file/d/1_kcUQyhwpBsycrwxkeToF92A4_ss7EyY/view)
+
+
+### Introducción
+
+De forma rápida se puede decir que XQuery es a XML lo que SQL a las BD relaciones.
+
+> XQuery es un lenguaje de consulta que proporciona los medios para extraer y manipular información de cualquier fuente de datos que pueda ser representada en formato XML.
+> 
+
+Su principal función es extraer información de un conjunto de datos organizados como un árbol de etiquetas XML. En este sentido XQuery es independiente del origen de los datos.
+
+Es un lenguaje funcional, lo que significa que, en vez de ejecutar una lista de comandos como un lenguaje procedimental clásico, cada consulta es una expresión evaluada que devuelve un resultado.
+
+**Caracteristicas** 
+
+- XQuery debe ser un lenguaje declarativo. Al igual que SQL hay que indicar que se quiere, no la manera de obtenerlo.
+- XQuery debe ser independiente del protocolo de acceso a la colección de datos. Una consulta en XQuery debe funcionar igual al consultar un archivo local que al consultar un servidor de bases de datos que al consultar un archivo XML en un servidor web.
+- Las consultas y los resultados deben respetar el modelo de datos XML.
+- Las consultas y los resultados deben ofrecer soporte para los namespace.
+- Debe ser capaz de soportar **XML-Schemas y DTDs** y también debe ser capaz de trabajar sin ninguno de ellos.
+- **XQuery debe poder trabajar con independencia de la estructura del documento**, esto es, sin necesidad de conocerla.
+- XQuery debe soportar tipos simples, como enteros y cadenas, y tipos complejos, como un nodo compuesto por varios nodos hijos. Las consultan deben soportar cuantificadores universales (para todo) y existenciales (existe).
+
+> Para su funcionamiento interno se apoya en **XPath** para poder acceder a la información contenida en nodos del documento XML.
+
+
+<aside>
+💡  **La otra utilidad fundamental de este lenguaje es que nos da la posibilidad de transformar un XML en otro distinto o incluso en otro formato. Un ejemplo muy típico es tener una serie de datos en XML y generar un XHTML para que puedan ser mostrados en un navegador.**
+
+</aside>
+
+### Lenguaje
+
+**La expresión XQuery más importante es la llamada expresión FLWOR.** 
+
+<aside>
+💡 **FLWOR es el acrónimo inglés de “For-Let-Where-Order-Return”**
+y suele pronunciarse como la palabra inglesa "flower" (flor). Funciona de manera parecida a la instrucción SQL SELECT, que tiene cláusulas similares, como FROM, WHERE, ORDER BY, etc. La expresión FLWOR permite consultar datos XML y de BD con mayor eficacia que con expresiones XPath.
+
+</aside>
+
+FLWOR (pronounced "flower") is an acronym for "For, Let, Where, Order by, Return".
+
+- **For** - selects a sequence of nodes
+- **Let** - binds a sequence to a variable
+- **Where** - filters the nodes
+- **Order by** - sorts the nodes
+- **Return** - what to return (gets evaluated once for every node)
