@@ -5,7 +5,7 @@ Guardar este ejercicio en vuestro repositorio personal, en la carpeta que se lla
 
 ## Ejercicio 👋
 
-El ejercicio consiste en construir el código HTML y CSS para un componente QR, y que se parezca lo más posible al diseño proporcionado.
+El ejercicio consiste en construir el código HTML y CSS para un componente para una tarjeta de un blog, y que se parezca lo más posible al diseño proporcionado.
 
 Debes diseñarlo utilizando solo HTML y CSS.
 
@@ -15,7 +15,6 @@ Debes diseñarlo utilizando solo HTML y CSS.
 - Dentro del fichero `index_mobile.html` se debe incluir el código HTML necesario para crear el componente, para la versión móvil.
 - Usa la fuente a través de la directiva `@font-face` de CSS.
 - El código CSS necesario para dar estilo al componente se debe incluir en una hoja de estilos externa, dentro de la carpeta `assets\css`.
-- 
 
 ## Diseño
 
