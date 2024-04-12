@@ -11,8 +11,7 @@ Debes diseñarlo utilizando solo HTML y CSS.
 
 *A Realizar*
 
-- Dentro del fichero `index_desktop.html` se debe incluir el código HTML necesario para crear el componente, para la versión de escritorio.
-- Dentro del fichero `index_mobile.html` se debe incluir el código HTML necesario para crear el componente, para la versión móvil.
+- Dentro del fichero `index.html` se debe incluir el código HTML necesario para crear el componente, para la versión de escritorio y la versión móvil.
 - Usa la fuente a través de la directiva `@font-face` de CSS.
 - El código CSS necesario para dar estilo al componente se debe incluir en una hoja de estilos externa, dentro de la carpeta `assets\css`.
 
