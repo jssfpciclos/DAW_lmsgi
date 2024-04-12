@@ -25,8 +25,8 @@ Debes diseñarlo utilizando solo HTML y CSS.
 
 *A Realizar*
 
-- Dentro del fichero `index_desktop.html` se debe incluir el código HTML necesario para crear el componente QR, para la versión de escritorio.
-- Dentro del fichero `index_mobile.html` se debe incluir el código HTML necesario para crear el componente QR, para la versión móvil.
+- Dentro del fichero `index.html` se debe incluir el código HTML necesario para crear el componente QR, para la versión de escritorio y de móvil.
+
 - El código CSS necesario para dar estilo al componente QR se debe incluir dentro de la etiqueta `<style>` del fichero `index.html`.
 
 
