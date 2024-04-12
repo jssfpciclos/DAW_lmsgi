@@ -1,9 +1,14 @@
 /* === IMPORTANTE ===================================================
    No modificar estos estilos, ya que son imprescindibles para
-   que la página se vea correctamente.
+   que la pï¿½gina se vea correctamente.
    ================================================================== */
 
-/*-- Básico ----------------------------------------------------------*/
+/*-- Bï¿½sico ----------------------------------------------------------*/
+* { 
+  box-sizing: border-box;
+}
+
+
 ul, ul li { margin: 0; padding: 0; list-style: none; }
 h1, h2, h3, p, form { margin: 0; padding: 0; }
 .clear { clear: both; }
@@ -36,15 +41,15 @@ img { border: none; }
 /*-- Menu ------------------------------------------------------------*/
 #menu ul#menu_principal li { display: inline; float: left; }
 
-/*-- Sección Principal -----------------------------------------------*/
+/*-- Secciï¿½n Principal -----------------------------------------------*/
 #contenido #principal .articulo img { width: 100px; float: left; }
 
-/*-- Pie de página ---------------------------------------------------*/
+/*-- Pie de pï¿½gina ---------------------------------------------------*/
 #pie .enlaces   { float: left; }
 #pie .copyright { float: right; }
 
 /* === IMPORTANTE ===================================================
-   A partir de aquí, se pueden añadir todos los estilos propios que 
+   A partir de aquï¿½, se pueden aï¿½adir todos los estilos propios que 
    sean necesarios.
    ================================================================== */
 
