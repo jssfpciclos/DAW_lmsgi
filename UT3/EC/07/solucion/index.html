@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <!-- Agrega el icono favicon de tamaño 32x32 -->
+
+    <title>Product Preview Ejercicio 08</title>
+
+    <!-- Agrega el CSS a través de una etiqueta Link-->
+    <link rel="stylesheet" href="./assets/css/styles-nesting.css" />
+  </head>
+  <body>
+    <header id="main-header">
+      <nav class="navbar">
+        <img id="navbar-logo" src="./assets/images/logo.svg" alt="logo" />
+        <ul class="menu">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">New</a></li>
+          <li><a href="#">Popular</a></li>
+          <li><a href="#">Trending</a></li>
+          <li><a href="#">Categories</a></li>
+        </ul>
+        <div class="menu-toggle">
+          <img id="hamburguer-logo" src="./assets/images/icon-menu.svg" alt="" />
+        </div>
+      </nav>
+    </header>
+
+    <main class="main-container">
+      <section class="sc-main">
+        <section class="sc-hero">
+          <div class="image">
+            <img src="./assets/images/image-web-3-desktop.jpg" />
+          </div>
+          <div class="info">
+            <p class="image-caption">The Bright Future of Web 3.0?</p>
+            <div class="image-content">
+              <p>
+                We dive into the next evolution of the web that claims to put
+                the power of the platforms back into the hands of the people.
+                But is it really fulfilling its promise?
+              </p>
+              <div>
+                <button>Read more</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="sc-popular">
+          <div class="popular-card-item">
+            <div class="left">
+              <img src="./assets/images/image-retro-pcs.jpg" />
+            </div>
+            <div class="right">
+              <h3 class="grey">01</h3>
+              <h4>Reviving Retro PCs</h4>
+              <p class="grey">
+                What happens when old PCs are given modern upgrades?
+              </p>
+            </div>
+          </div>
+          <div class="popular-card-item">
+            <div class="left">
+              <img src="./assets/images/image-top-laptops.jpg" />
+            </div>
+
+            <div class="right">
+              <h3 class="grey">02</h3>
+              <h4>Top 10 Laptops of 2022</h4>
+              <p class="grey">Our best picks for various needs and budgets.</p>
+            </div>
+          </div>
+          <div class="popular-card-item">
+            <div class="left">
+              <img src="./assets/images/image-gaming-growth.jpg" />
+            </div>
+            <div class="right">
+              <h3>03</h3>
+              <h4>The Growth of Gaming</h4>
+              <p class="grey">
+                How the pandemic has sparked fresh opportunities.
+              </p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <sidebar class="sidebar">
+        <div class="new-content">
+          <h2>New</h2>
+          <div class="card-new">
+            <h3>Hydrogen VS Electric Cars</h3>
+            <p>Will hydrogen-fueled cars ever catch up to EVs?</p>
+          </div>
+          <hr />
+          <div class="card-new">
+            <h3>The Downsides of AI Artistry</h3>
+            <p>
+              What are the possible adverse effects of on-demand AI image
+              generation?
+            </p>
+          </div>
+          <hr />
+          <div class="card-new">
+            <h3>Is VC Funding Drying Up?</h3>
+            <p>
+              Private funding by VC firms is down 50% YOY. We take a look at
+              what that means.
+            </p>
+          </div>
+        </div>
+      </sidebar>
+    </main>
+  </body>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const menu = document.querySelector(".menu");
+    const hamburguer_logo = document.querySelector("#hamburguer-logo");
+
+    menuToggle.addEventListener("click", () => {
+      menuToggle.classList.toggle("active");
+      menu.classList.toggle("active");
+
+      if (menu.classList.contains("active")) {
+        hamburguer_logo.src = "./assets/images/icon-menu-close.svg";
+      } else {
+        hamburguer_logo.src = "./assets/images/icon-menu.svg";
+      }
+    });
+
+  </script>
+</html>
