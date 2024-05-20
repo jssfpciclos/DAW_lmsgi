@@ -112,3 +112,55 @@ Con las siguientes secciones:
 
 - La entrega se realizará en vuestro repositiorio personal de GitHub.
 - En moodle se entregará el enlace (del commit y fijado en el tiempo `pulsar "y" visualizando el fichero readme en github`) al fichero `README.md` del proyecto.
+
+
+
+## Anexos
+
+### Recursos
+
+- [General: Recopilación de recursos de diseño web](https://recursoscosmicos.com/recursos-de-diseo)
+
+
+- **Iconos** 
+
+  - [Tabler Icons](https://tablericons.com/)
+  - [Font Awesome](https://fontawesome.com/)
+  
+
+- **Generadores de paletas de colores**
+
+  - [Coolors](https://coolors.co/)
+  - [Color Hunt](https://colorhunt.co/)
+  - [Adobe Color](https://color.adobe.com/es/create/color-wheel)
+  - [Paletton](https://paletton.com/)
+
+
+- **Fuentes**
+
+  - [Google Fonts](https://fonts.google.com/)
+  - [Font Squirrel](https://www.fontsquirrel.com/)
+  - [DaFont](https://www.dafont.com/)
+
+
+- **Imágenes**
+
+  - [Unsplash](https://unsplash.com/)
+  - [Pexels](https://www.pexels.com/)
+  - [Pixabay](https://pixabay.com/es/)
+
+
+- **Generadores de dividers**
+
+  - [Dividers](https://www.dividers.app/)
+  - [Shepe Dividers](https://www.shapedividers.com/)
+  - [CSS Separator Generator](https://wweb.dev/resources/css-separator-generator)
+  - [CSS Gradient](https://cssgradient.io/)
+  - [CSS Gradient Generator](https://www.colorzilla.com/gradient-editor/)
+
+
+### Herramientas
+
+- [Astro](https://astro.build/)
+- [WhatTheFont - Saber qué fuente utiliza una página](https://www.myfonts.com/WhatTheFont/)
+- [VisBug - Inspeccionar y editar una página web](https://chrome.google.com/webstore/detail/visbug/cdockenadnadldjbbgcallicgledbeoc)
