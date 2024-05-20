@@ -111,4 +111,4 @@ Con las siguientes secciones:
 ## Entrega
 
 - La entrega se realizará en vuestro repositiorio personal de GitHub.
-- En moodle se entregará el enlace (del commit) al fichero `README.md` del proyecto.
+- En moodle se entregará el enlace (del commit y fijado en el tiempo `pulsar y visualizando el fichero readme en github`) al fichero `README.md` del proyecto.
