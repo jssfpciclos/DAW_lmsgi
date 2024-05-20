@@ -97,7 +97,6 @@ Con las siguientes secciones:
 
 ## Evaluación
 
---- ----
 | Criterio | Puntuación |
 | --- | --- |
 | - Pagina visualiza correctamente, cumple con las funcionalidades y elementos mínimos  | 5 puntos | 
