@@ -159,6 +159,13 @@ Con las siguientes secciones:
   - [CSS Gradient Generator](https://www.colorzilla.com/gradient-editor/)
 
 
+
+### Recurso Astro
+
+- [Awesome Astro con Ejemplos de la Comunidad](https://github.com/one-aalam/awesome-astro)
+- [Plantillas/Temas de Astro](https://astro.build/themes/)
+
+
 ### Herramientas
 
 - [Astro](https://astro.build/)
